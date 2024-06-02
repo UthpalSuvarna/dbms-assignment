@@ -26,8 +26,10 @@ if (!isset($_SESSION['name'])) {
             <div class="grid gap-3">
                 <button class="btn btn-success me-0 me-md-2 mb-2 mb-md-0" type="button" data-bs-toggle="modal"
                     data-bs-target="#addModal">Add</button>
-                <button class="btn btn-secondary me-0 me-md-2 mb-2 mb-md-0" type="button">Update</button>
-                <button class="btn btn-danger me-0 me-md-2 mb-2 mb-md-0" type="button">Delete</button>
+                <button class="btn btn-secondary me-0 me-md-2 mb-2 mb-md-0" type="button" data-bs-toggle="modal"
+                    data-bs-target="#updateModal">Update</button>
+                <button class="btn btn-danger me-0 me-md-2 mb-2 mb-md-0" type="button" data-bs-toggle="modal"
+                    data-bs-target="#deleteModal">Delete</button>
             </div>
         </div>
         <table class="table table-striped table-bordered">
@@ -59,7 +61,7 @@ if (!isset($_SESSION['name'])) {
         </table>
     </div>
 
-    <!-- ADD MODAL -->
+    <!-- Add modal -->
     <form action="actions/insert_dept.php" method="post">
         <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addDepartment" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
@@ -79,6 +81,53 @@ if (!isset($_SESSION['name'])) {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <input type="submit" class="btn btn-success" name="add_dept" value="ADD">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Update Modal -->
+    <form action="actions/update_dept.php" method="post">
+        <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="addDepartment" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Department</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <label for="id">ID of Department to be Updated</label>
+                        <input type="text" name="id" class="form-control" placeholder="Enter ID">
+                        <label for="name">New Department Name</label>
+                        <input type="text" name="name" class="form-control" placeholder="Enter Name">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-success" name="update_dept" value="UPDATE">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Delete Modal -->
+    <form action="actions/delete_dept.php" method="post">
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="addDepartment" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Department</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <label for="id">ID of Department to be Deleted</label>
+                        <input type="text" name="id" class="form-control" placeholder="Enter ID">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-danger" name="delete_dept" value="DELETE">
                     </div>
                 </div>
             </div>
