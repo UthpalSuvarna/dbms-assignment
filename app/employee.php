@@ -23,7 +23,8 @@ if (!isset($_SESSION['name'])) {
         <div class="mb-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
             <h2 class="mb-3 mb-md-0">Employee List</h2>
             <div class="grid gap-3">
-                <button class="btn btn-success me-0 me-md-2 mb-2 mb-md-0" type="button">Add</button>
+                <button class="btn btn-success me-0 me-md-2 mb-2 mb-md-0" type="button" data-bs-toggle="modal"
+                    data-bs-target="#addModal">Add</button>
                 <button class="btn btn-secondary me-0 me-md-2 mb-2 mb-md-0" type="button">Update</button>
                 <button class="btn btn-danger me-0 me-md-2 mb-2 mb-md-0" type="button">Delete</button>
             </div>
@@ -60,6 +61,35 @@ if (!isset($_SESSION['name'])) {
             </tbody>
         </table>
     </div>
+
+    <!-- Add modal -->
+    <form action="actions/insert_emp.php" method="post">
+        <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addEmployee" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Add Employee</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+
+                        <label for="id">Employee ID</label>
+                        <input type="text" name="emp_id" class="form-control" placeholder="Enter ID">
+                        <label for="name">Employee Name</label>
+                        <input type="text" name="emp_name" class="form-control" placeholder="Enter Name">
+                        <label for="name">Salary</label>
+                        <input type="text" name="salary" class="form-control" placeholder="Enter Name">
+                        <label for="name">Department ID</label>
+                        <input type="text" name="dept_id" class="form-control" placeholder="Enter Name">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-success" name="add_emp" value="ADD">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
