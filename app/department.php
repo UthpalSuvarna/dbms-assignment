@@ -20,7 +20,7 @@ if (!isset($_SESSION['name'])) {
 <body>
     <?php include 'components/navbar.php'; ?>
 
-    <div class="container mt-5">
+    <div class="container mt-5 h-100 min-vh-100">
         <div class="mb-4 d-flex flex-column flex-md-row justify-content-between align-items-center">
             <h2 class="mb-3 mb-md-0">Department List</h2>
             <div class="grid gap-3">
@@ -133,6 +133,7 @@ if (!isset($_SESSION['name'])) {
             </div>
         </div>
     </form>
+    <?php include 'components/footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
