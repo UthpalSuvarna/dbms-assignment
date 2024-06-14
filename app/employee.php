@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'dbconfig.php';
 if (!isset($_SESSION['name'])) {
     header("Location: login.php");
     exit();
@@ -11,7 +12,7 @@ if (!isset($_SESSION['name'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Employee</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -37,36 +38,25 @@ if (!isset($_SESSION['name'])) {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Human Resources</td>
-                    <td>gkjfg</td>
-                    <td>dfgf</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Finance</td>
-                    <td>gkjfg</td>
-                    <td>dfgf</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Marketing</td>
-                    <td>gkjfg</td>
-                    <td>dfgf</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>IT</td>
-                    <td>gkjfg</td>
-                    <td>dfgf</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Customer Service</td>
-                    <td>gkjfg</td>
-                    <td>dfgf</td>
-                </tr>
+                <?php
+                $query = "SELECT * FROM employee";
+                $result = mysqli_query($connection, $query);
+
+                if (!$result) {
+                    die("Query Failed");
+                } else {
+                    while ($row = mysqli_fetch_array($result)) {
+                        ?>
+                        <tr>
+                            <td><?php echo $row['emp_id'] ?></td>
+                            <td><?php echo $row['emp_name'] ?></td>
+                            <td><?php echo $row['salary'] ?></td>
+                            <td><?php echo $row['dept_id'] ?></td>
+                        </tr>
+                        <?php
+                    }
+                }
+                ?>
             </tbody>
         </table>
     </div>
