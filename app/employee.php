@@ -26,26 +26,27 @@ if (!isset($_SESSION['name'])) {
                 <div class="dropdown me-3">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
                         aria-expanded="false" data-bs-auto-close="outside">
-                        Dropdown form
+                        Select Department
                     </button>
-                    <form class="dropdown-menu p-4">
-                        <div class="mb-3">
-                            <label for="exampleDropdownFormEmail2" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="exampleDropdownFormEmail2"
-                                placeholder="email@example.com">
+                    <form method="GET" class="dropdown-menu form-inline">
+                        <div class="form-group m-3">
+                            <label for="dept_id" class="mr-2">Select Department:</label>
+                            <select class="form-select" id="dept_id" name="dept_id">
+                                <option selected disabled><i>Department</i></option>
+                                <option value="">All Departments</option>
+                                <?php
+
+                                $dept_query = "SELECT * FROM department";
+                                $dept_result = mysqli_query($connection, $dept_query);
+
+                                while ($dept_row = mysqli_fetch_array($dept_result)) {
+                                    $selected = isset($_GET['id']) && $_GET['id'] == $dept_row['id'] ? 'selected' : '';
+                                    echo "<option value='" . $dept_row['id'] . "' $selected>" . $dept_row['name'] . "</option>";
+                                }
+                                ?>
+                            </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleDropdownFormPassword2" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="exampleDropdownFormPassword2"
-                                placeholder="Password">
-                        </div>
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="dropdownCheck2">
-                                <label class="form-check-label" for="dropdownCheck2">Remember me</label>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
+                        <button type="submit" class="btn btn-primary ml-2 mx-3 mb-2">Filter</button>
                     </form>
                 </div>
                 <div class="d-flex gap-3">
@@ -71,10 +72,17 @@ if (!isset($_SESSION['name'])) {
             <tbody>
                 <?php
                 $query = "SELECT * FROM employee";
+                if (isset($_GET['dept_id'])) {
+                    $dept_id = $_GET['dept_id'];
+                    if (!empty($dept_id)) {
+                        $query .= " WHERE dept_id = '$dept_id'";
+                    }
+                }
+
                 $result = mysqli_query($connection, $query);
 
                 if (!$result) {
-                    die("Query Failed");
+                    die("Query Failed: " . mysqli_error($connection));
                 } else {
                     while ($row = mysqli_fetch_array($result)) {
                         ?>
