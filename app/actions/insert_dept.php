@@ -18,7 +18,13 @@ if (isset($_POST['add_dept'])) {
         echo "<script>window.location.href='../department.php'</script>";
         exit;
     }
-
+    $check_name_query = "SELECT * FROM department WHERE name = '$name'";
+    $check_name_result = mysqli_query($connection, $check_name_query);
+    if (mysqli_num_rows($check_name_result) > 0) {
+        echo "<script>alert('Department with the same name already exists')</script>";
+        echo "<script>window.location.href='../department.php'</script>";
+        exit;
+    }
     $query = "INSERT INTO department (id, name) VALUES ('$id', '$name')";
     $result = mysqli_query($connection, $query);
 
